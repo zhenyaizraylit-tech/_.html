@@ -3,18 +3,115 @@
  <head>
   <meta charset="utf-8">
   <title> Тексты </title>
-  <style>
-    P,h1,h2 {color: black;}
+  <style> 
+	
+
+        /* Аудиоплеер */
+ 
+
+        .audio-player audio {
+            width: 100%;
+            max-width: 500px;
+            margin: 15px 0;
+            display: block;
+        }
+	 .audio-label {
+            display: flex;
+    	    gap: 10px;
+            background: #4a6491;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+
+
+	/* Шапка сайта */
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #4a6491 100%);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden; }
+
+        .header::before {
+            content: "⚜️";
+            position: absolute;
+            font-size: 120px;
+            opacity: 0.1;
+            top: 10px;
+            left: 10px; }
+
+        .header::after {
+            content: "🇫🇷";
+            position: absolute;
+            font-size: 120px;
+            opacity: 0.1;
+            bottom: 10px;
+            right: 10px; }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;}
+
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-style: italic;
+            position: relative;
+            z-index: 1;}
+	.home-link-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    background: linear-gradient(135deg, #4a6491 0%, #2c3e50 100%);
+    color: white;
+    text-decoration: none;
+    padding: 0.8rem 2rem;
+    border-radius: 25px;
+    font-size: 1rem;
+    margin-top: 1.5rem;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.home-link-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(44, 62, 80, 0.3);
+}
   </style>
  </head>
  <body>	
-	<h1>Текст 1</h1>
-	<audio controls>
-        <source src="paris1.mp3" type="audio/mpeg">
-    </audio>
+
+<header class="header">
+        <h1>Тексты</h1>
+    </header>
+	
+   
+
+
+
+<div class="audio-player">
+            
+            <audio controls>
+                <source src="paris1.mp3" type="audio/mpeg">
+                Ваш браузер не поддерживает аудио элемент.
+            </audio>
+            
+        </div>
+
 <h3>Paris est la capitale de la France. L’agglomération de Paris compte plus de 10 millions d’habitants. Un fleuve traverse la capitale française, c’est la Seine. Dans Paris, il y a deux îles :  l'île de la Cité et l'île Saint-Louis.</h3>
 <h3>Paris compte vingt arrondissements. Le 16e, le 7e et le 8e arrondissements de Paris sont les quartiers les plus riches. Ils sont situés dans l’ouest de la capitale. Les quartiers populaires comme le 19e et le 20e sont au nord-est de la ville. Les monuments célèbres, les ministères, le palais de l’Élysée sont situés dans le centre de Paris.</h3>
 <h3>Paris est la capitale économique, la capitale politique et la capitale culturelle de la France. La ville compte beaucoup de lieux célèbres dans le monde entier comme « la tour Eiffel » , « l’Arc de Triomphe » et « Notre-Dame de Paris ». Les musées parisiens aussi sont très connus. Il y a, par exemple, le musée du Louvre. C’est le plus grand musée de France. On peut voir dans le musée du Louvre des tableaux magnifiques. Le plus célèbre est certainement « La Joconde » de Léonard de Vinci.</h3>
 <h3>Paris est une ville très touristique. Chaque année, des millions de touristes du monde entier marchent sur les Champs-Élysées. Ils séjournent à l’hôtel, louent des chambres d’hôtes ou des appartements pour une semaine.</h3>
+<a href="Проект 9 класс.html" class="home-link-button">
+    <span>← Вернуться на главную</span></a>
  </body>
 </html>

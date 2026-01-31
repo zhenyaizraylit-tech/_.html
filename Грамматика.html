@@ -2,27 +2,214 @@
 <html>
  <head>
   <meta charset="utf-8">
-  <title> Французский язык </title>
-  <style>
-	P,h1,h2 {color: black;}
-	.page {display: none;}
-        #page1 {display: block;}
-  </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Français Facile - Изучаем французский язык</title>
+    <style>
+        
+
+        /* Шапка сайта */
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #4a6491 100%);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden; }
+
+        .header::before {
+            content: "⚜️";
+            position: absolute;
+            font-size: 120px;
+            opacity: 0.1;
+            top: 10px;
+            left: 10px; }
+
+        .header::after {
+            content: "🇫🇷";
+            position: absolute;
+            font-size: 120px;
+            opacity: 0.1;
+            bottom: 10px;
+            right: 10px; }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;}
+
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-style: italic;
+            position: relative;
+            z-index: 1;}
+
+  .french-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    margin: 20px;
+}
+
+.nav-btn {
+    background: linear-gradient(145deg, #ffffff, #f0f2f5);
+    border: 2px solid transparent;
+    border-radius: 12px;
+    padding: 14px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #2c3e50;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1),
+                -5px -5px 15px rgba(255, 255, 255, 0.7);
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.4), 
+        transparent);
+    transition: 0.5s;
+}
+
+.nav-btn:hover::before {
+    left: 100%;
+}
+
+.nav-btn:hover {
+    transform: translateY(-3px);
+    border-color: #4a6491;
+    box-shadow: 0 8px 25px rgba(74, 100, 145, 0.25);
+    background: linear-gradient(145deg, #ffffff, #e3e6ea);
+}
+
+.nav-btn:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(74, 100, 145, 0.2);
+}
+
+.btn-icon {
+    font-size: 20px;
+    transition: transform 0.3s ease;
+}
+
+.nav-btn:hover .btn-icon {
+    transform: scale(1.2) rotate(5deg);
+}
+
+ /* Кнопка возврата */
+        .back-button {
+            background: linear-gradient(135deg, #4a6491 0%, #2c3e50 100%);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 1.5rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(44, 62, 80, 0.3);
+        }
+
+
+
+/* Активная кнопка */
+.nav-btn.active {
+    background: linear-gradient(135deg, #4a6491 0%, #2c3e50 100%);
+    color: white;
+    box-shadow: 0 6px 20px rgba(44, 62, 80, 0.3);
+}
+
+.nav-btn.active .btn-icon {
+    filter: brightness(0) invert(1);
+}
+.home-link-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    background: linear-gradient(135deg, #4a6491 0%, #2c3e50 100%);
+    color: white;
+    text-decoration: none;
+    padding: 0.8rem 2rem;
+    border-radius: 25px;
+    font-size: 1rem;
+    margin-top: 1.5rem;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.home-link-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(44, 62, 80, 0.3);
+}
+	</style>
  </head>
  <body>
+	
+	<header class="header">
+        <h1>Грамматика</h1>
+    </header>
 
-    <nav>
-        <button onclick="showPage('page1')">Существительные</button>
-        <button onclick="showPage('page2')">Глаголы</button>
-        <button onclick="showPage('page3')">Прилагательные</button>
-        <button onclick="showPage('page4')">Наречия</button>
-        <button onclick="showPage('page5')">Предлоги</button>
-	<button onclick="showPage('page6')">Местоимения</button>
-        <button onclick="showPage('page7')">Счёт</button>
-    </nav>
+    <nav class="french-nav">
+    <button onclick="showPage('page1')" class="nav-btn">
+        <span class="btn-icon">📔</span>
+        <span class="btn-text">Существительные</span>
+    </button>
+    <button onclick="showPage('page2')" class="nav-btn">
+        <span class="btn-icon">⚡️</span>
+        <span class="btn-text">Глаголы</span>
+    </button>
+    <button onclick="showPage('page3')" class="nav-btn">
+        <span class="btn-icon">🎨</span>
+        <span class="btn-text">Прилагательные</span>
+    </button>
+    <button onclick="showPage('page4')" class="nav-btn">
+        <span class="btn-icon">📌</span>
+        <span class="btn-text">Наречия</span>
+    </button>
+    <button onclick="showPage('page5')" class="nav-btn">
+        <span class="btn-icon">📍</span>
+        <span class="btn-text">Предлоги</span>
+    </button>
+    <button onclick="showPage('page6')" class="nav-btn">
+        <span class="btn-icon">👤</span>
+        <span class="btn-text">Местоимения</span>
+    </button>
+    <button onclick="showPage('page7')" class="nav-btn">
+        <span class="btn-icon">🔢</span>
+        <span class="btn-text">Счёт</span>
+    </button>
+</nav>
 
 
-<div id="page1" class="page">
+<div id="page1" class="page" style="display: none;">
 <h1>Артикли</h1>
 <p>Артикли употребляются перед существительными, указывая на их род и число, а также выражают определенность или неопределенность существительного.</p>
 <p>Во французском языке артикли подразделяются на определенные, неопределенные и частичные.</p>
@@ -153,9 +340,11 @@
 <tr><td align='center'> -ure</td>
 <td align='center'> un augure, un murmure, un parjure, le mercure</td></tr>
 </table>
+<button class="back-button" onclick="showPage('home')">← Назад к меню</button>
+<a href="Проект 9 класс.html" class="home-link-button">
+    <span>← Вернуться на главную</span></a>
 </div>
-
-<div id="page2" class="page">
+<div id="page2" class="page" style="display: none;">
 
 <h1>Спряжение глаголов</h1>
 <p>Спряжением глагола называется его изменение по наклонениям, временам, лицам, родам и числам.</p>
@@ -184,9 +373,11 @@
 <h1>Времена глагола</h1>
 <p>Во французском языке времен больше, чем в русском. Их делят на простые и сложные. Простые времена образуются без вспомогательного глагола, сложные — при помощи вспомогательного глагола.</p>
 <p>Вспомогательных глаголов 4: avoir, être, aller и venir. Последние два употребляются для образования времен группы immédiat — ближайшего прошедшего (venir) и ближайшего будущего (aller). Остальные времена строятся при помощи avoir или être, стоящих в определенном времени.</p>
+<button class="back-button" onclick="showPage('home')">← Назад к меню</button>
+<a href="Проект 9 класс.html" class="home-link-button">
+    <span>← Вернуться на главную</span></a>
 </div>
-
-<div id="page3" class="page">
+<div id="page3" class="page" style="display: none;">
 <h1>Указательные прилагательные (adjectifs démonstratifs)</h1>
 <p>Употребляются перед существительным и согласуются с ним в роде и числе.</p>
 <table>
@@ -233,9 +424,11 @@
 	<td align='center'> leur (их)</td>
 	<td align='center'> leurs (их)</td></tr>
 </table>
+<button class="back-button" onclick="showPage('home')">← Назад к меню</button>
+<a href="Проект 9 класс.html" class="home-link-button">
+    <span>← Вернуться на главную</span></a>
 </div>
-
-<div id="page4" class="page">
+<div id="page4" class="page" style="display: none;">
 <h1>Наречия (Adverbes)</h1>
 <h3>Образование наречий способа действия от прилагательных</h3>
 <p>Прилагательное в женском роде + суффикс –ment:</p>
@@ -246,9 +439,11 @@ Qui и que могут быть 1) словами «кто» и «что»; 2) о
 <p>1. qui + сказуемое-глагол (qui sort d’ici = «который вышел отсюда» / qui a reçu = «который получил»).</p>
 <p>2. qui + местоимение-дополнение + сказуемое-глагол (qui m’intéresse = «который меня интересует»).</p>
 <p>3. que (qu’) + подлежащее + сказуемое-глагол (que tu as achetée = «которую ты купил» / que tu vois = «которую ты видишь»).</p>
+<button class="back-button" onclick="showPage('home')">← Назад к меню</button>
+<a href="Проект 9 класс.html" class="home-link-button">
+    <span>← Вернуться на главную</span></a>
 </div>
-
-<div id="page5" class="page">
+<div id="page5" class="page" style="display: none;">
 <h1>Предлоги</h1>
 <table>
 <tr><td><h3>Место</h3></td><td></td>
@@ -328,9 +523,11 @@ Qui и que могут быть 1) словами «кто» и «что»; 2) о
 <td align='center'>malgré</td><td>не смотря на</td><td> </td></tr>
 <tr><td align='center'>envers</td><td>по отношению к</td></tr>
 </table>
+<button class="back-button" onclick="showPage('home')">← Назад к меню</button>
+<a href="Проект 9 класс.html" class="home-link-button">
+    <span>← Вернуться на главную</span></a>
 </div>
-
-<div id="page6" class="page">
+<div id="page6" class="page" style="display: none;">
 <h1>Личные местоимения</h1>
 <table>
 <tr>	<td><h3> Подлежащее</h3></td>
@@ -369,9 +566,11 @@ Qui и que могут быть 1) словами «кто» и «что»; 2) о
 	<td> </td>
 	<td align='center'> leur — им</td></tr>
 </table>
+<button class="back-button" onclick="showPage('home')">← Назад к меню</button>
+<a href="Проект 9 класс.html" class="home-link-button">
+    <span>← Вернуться на главную</span></a>
 </div>
-
-<div id="page7" class="page">
+<div id="page7" class="page" style="display: none;">
 <h1>Счет (числа) по-французски</h1>
 <table>
 <tr>	<td>0 zéro</td>
@@ -445,6 +644,9 @@ Qui и que могут быть 1) словами «кто» и «что»; 2) о
 	<td>79 soixante-dix-neuf</td>
 	<td>89 quatre-vingt-neuf</td></tr>
 </table>
+<button class="back-button" onclick="showPage('home')">← Назад к меню</button>
+<a href="Проект 9 класс.html" class="home-link-button">
+    <span>← Вернуться на главную</span></a>
 </div>
  <script>
         function showPage(pageId) {
@@ -473,6 +675,12 @@ Qui и que могут быть 1) словами «кто» и «что»; 2) о
 
  </body>
 </html>
+
+
+
+
+
+
 
 
 

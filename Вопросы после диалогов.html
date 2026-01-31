@@ -2,23 +2,400 @@
 <html>
  <head>
   <meta charset="utf-8">
-  <title> Вопросы после текстов и диалогов</title>
+  <title> Вопросы после диалогов</title>
   <style>
-    P,h1,h2 {color: black;}
-  </style>
- </head>
- <body>	
-<h1>Диалог 1</h1>	
-	<h3>1. Elisabeth est dans l'école depuis quand ?</h3>
-	<h3>2. Les professeurs sont comment ?</h3>
-	<h3>3. La maison de la famille d'accueil est où ?</h3>
-	<h3>4. Le cours commence quand ?</h3>
-<details>
-  <summary>Показать ответы</summary>
-	<p>1. Elle est dans l'école depuis lundi.</p>
-	<p>2. Ils sont sympa.</p>
-	<p>3. Elle n'est pas loin de l'école.</p>
-	<p>4. Le cours commence dans cinq minutes.</p>
-</details>
- </body>
+/* Шапка сайта */
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #4a6491 100%);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden; }
+
+        .header::before {
+            content: "⚜️";
+            position: absolute;
+            font-size: 120px;
+            opacity: 0.1;
+            top: 10px;
+            left: 10px; }
+
+        .header::after {
+            content: "🇫🇷";
+            position: absolute;
+            font-size: 120px;
+            opacity: 0.1;
+            bottom: 10px;
+            right: 10px; }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;}
+
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-style: italic;
+            position: relative;
+            z-index: 1;}
+	.home-link-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    background: linear-gradient(135deg, #4a6491 0%, #2c3e50 100%);
+    color: white;
+    text-decoration: none;
+    padding: 0.8rem 2rem;
+    border-radius: 25px;
+    font-size: 1rem;
+    margin-top: 1.5rem;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.home-link-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(44, 62, 80, 0.3);
+}
+	
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .questions-container {
+            max-width: 800px;
+            margin: 30px auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .questions-title {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #4a6491;
+            position: relative;
+            text-align: center;
+        }
+
+       
+
+        /* Стили для вопросов */
+        .question-card {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 5px solid #4a6491;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .question-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, #4a6491 0%, #2c3e50 100%);
+            color: white;
+            border-radius: 50%;
+            font-weight: bold;
+            margin-right: 15px;
+            font-size: 0.9rem;
+        }
+
+        .question-text {
+            font-size: 1.2rem;
+            color: #2c3e50;
+            font-weight: 500;
+            display: inline;
+        }
+
+        .question-text-french {
+            color: #2980b9;
+            font-style: italic;
+            font-weight: 600;
+        }
+
+        /* Стили для ответов */
+details {
+    margin-top: 30px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); /* нейтральный фон */
+    border: 2px solid rgba(0, 85, 164, 0.2); /* синяя рамка */
+}
+
+summary {
+    padding: 20px 25px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: all 0.3s ease;
+    background: linear-gradient(90deg, 
+        #0055a4 0%,     /* синий */
+        #ffffff 33%,    /* белый */
+        #ffffff 66%,    /* белый */
+        #ef4135 100%);  /* красный */
+    color: #0055a4; /* синий текст */
+}
+
+details[open] summary {
+    background: linear-gradient(90deg, 
+        #003d73 0%,     /* темно-синий */
+        #f8f9fa 33%,    /* светлый */
+        #f8f9fa 66%,    /* светлый */
+        #d32f2f 100%);  /* темно-красный */
+}
+
+summary:hover {
+    background: linear-gradient(90deg, 
+        #0066cc 0%,     /* ярко-синий */
+        #ffffff 33%, 
+        #ffffff 66%, 
+        #ff5252 100%);  /* ярко-красный */
+}
+
+        .answers-content {
+            padding: 25px;
+        }
+
+        .answer-item {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid #27ae60;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .answer-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .answer-check {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 30px;
+            height: 30px;
+            background: #27ae60;
+            color: white;
+            border-radius: 50%;
+            font-size: 0.9rem;
+        }
+
+        .answer-number {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .answer-text {
+            flex: 1;
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+
+        .answer-text-french {
+            color: #27ae60;
+            font-weight: 600;
+            font-style: italic;
+        }
+
+        .translation {
+            display: block;
+            color: #666;
+            font-size: 0.95rem;
+            margin-top: 5px;
+            padding-left: 20px;
+            border-left: 2px solid #ddd;
+        }
+
+        
+
+        /* Кнопки навигации */
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 40px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #4a6491 0%, #2c3e50 100%);
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(44, 62, 80, 0.3);
+        }
+
+        .nav-btn.back {
+            background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+        }
+
+        .nav-btn.next {
+            background: linear-gradient(135deg, #27ae60 0%, #219653 100%);
+        }
+
+       
+    </style>
+</head>
+<body>
+<header class="header">
+        <h1>Вопросы к диалогам</h1>
+    </header>
+    <div class="questions-container">
+        <h1 class="questions-title">Вопросы к диалогу 1</h1>
+
+        
+        <div class="question-card">
+            <span class="question-number">1</span>
+            <p class="question-text">
+                <span class="question-text-french">Elisabeth est dans l'école depuis quand ?</span>
+                <br>
+                <small style="color: #666; margin-top: 5px; display: block;">
+                    Как долго Элизабет в школе?
+                </small>
+            </p>
+        </div>
+        
+        <div class="question-card">
+            <span class="question-number">2</span>
+            <p class="question-text">
+                <span class="question-text-french">Les professeurs sont comment ?</span>
+                <br>
+                <small style="color: #666; margin-top: 5px; display: block;">
+                    Какие они, преподаватели?
+                </small>
+            </p>
+        </div>
+        
+        <div class="question-card">
+            <span class="question-number">3</span>
+            <p class="question-text">
+                <span class="question-text-french">La maison de la famille d'accueil est où ?</span>
+                <br>
+                <small style="color: #666; margin-top: 5px; display: block;">
+                    Где находится дом принимающей семьи?
+                </small>
+            </p>
+        </div>
+        
+        <div class="question-card">
+            <span class="question-number">4</span>
+            <p class="question-text">
+                <span class="question-text-french">Le cours commence quand ?</span>
+                <br>
+                <small style="color: #666; margin-top: 5px; display: block;">
+                    Когда начинается урок?
+                </small>
+            </p>
+        </div>
+
+        
+        <details>
+            <summary>Показать ответы</summary>
+            <div class="answers-content">
+                <div class="answer-item">
+                    <div class="answer-check">✓</div>
+                    <div class="answer-text">
+                        <span class="answer-number">1.</span>
+                        <span class="answer-text-french">Elle est dans l'école depuis lundi.</span>
+                        <span class="translation">Она в школе с понедельника.</span>
+                    </div>
+                </div>
+                
+                <div class="answer-item">
+                    <div class="answer-check">✓</div>
+                    <div class="answer-text">
+                        <span class="answer-number">2.</span>
+                        <span class="answer-text-french">Ils sont sympas.</span>
+                        <span class="translation">Они симпатичные/приятные.</span>
+                    </div>
+                </div>
+                
+                <div class="answer-item">
+                    <div class="answer-check">✓</div>
+                    <div class="answer-text">
+                        <span class="answer-number">3.</span>
+                        <span class="answer-text-french">Elle n'est pas loin de l'école./span>
+                        <span class="translation">Она недалеко от школы.</span>
+                    </div>
+                </div>
+                
+                <div class="answer-item">
+                    <div class="answer-check">✓</div>
+                    <div class="answer-text">
+                        <span class="answer-number">4.</span>
+                        <span class="answer-text-french">Le cours commence dans cinq minutes.</span>
+                        <span class="translation">Урок начинается через пять минут.</span>
+                    </div>
+                </div>
+            </div>
+        </details>
+        
+        
+    </div>
+
+    <script>
+        // Добавляем интерактивность
+        document.addEventListener('DOMContentLoaded', function() {
+           
+            
+            // Анимация для details
+            const details = document.querySelector('details');
+            details.addEventListener('toggle', function() {
+                if (this.open) {
+                    this.style.animation = 'fadeIn 0.5s ease';
+                }
+            });
+            
+           
+                });
+            });
+        });
+    </script>
+</body>
 </html>

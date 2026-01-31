@@ -1,79 +1,580 @@
 <!DOCTYPE html>
 <html>
- <head>
-  <meta charset="utf-8">
-<title>Новые слова</title>
-<style>
-  table, th, td {border: 1px solid black;border-collapse: collapse;padding: 8px;}
-</style>
+<head>
+    <meta charset="utf-8">
+    <title>Новые слова</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+	.home-link-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    background: linear-gradient(135deg, #4a6491 0%, #2c3e50 100%);
+    color: white;
+    text-decoration: none;
+    padding: 0.8rem 2rem;
+    border-radius: 25px;
+    font-size: 1rem;
+    margin-top: 1.5rem;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    position: relative; /* Добавляем это! */
+    overflow: hidden; /* Добавляем это! */
+}
+
+/* Создаем элемент для блика */
+.home-link-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.3), 
+        transparent);
+    transition: 0.6s ease;
+}
+
+/* Анимация блика при наведении */
+.home-link-button:hover::before {
+    left: 100%;
+}
+
+.home-link-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(44, 62, 80, 0.3);
+}
+        /* Шапка сайта */
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #4a6491 100%);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .header::before {
+            content: "⚜️";
+            position: absolute;
+            font-size: 120px;
+            opacity: 0.1;
+            top: 10px;
+            left: 10px;
+        }
+
+        .header::after {
+            content: "🇫🇷";
+            position: absolute;
+            font-size: 120px;
+            opacity: 0.1;
+            bottom: 10px;
+            right: 10px;
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Основной контейнер */
+        .words-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Заголовок таблицы */
+        .table-title {
+            color: #2c3e50;
+            font-size: 2rem;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #4a6491;
+            position: relative;
+        }
+
+        .table-title::after {
+            content: '📚';
+            position: absolute;
+            right: 0;
+            font-size: 2rem;
+            opacity: 0.3;
+        }
+
+        /* Таблица */
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 25px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        thead {
+            background: linear-gradient(135deg, #4a6491 0%, #2c3e50 100%);
+            color: white;
+        }
+
+        th {
+            padding: 18px 20px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border: none;
+            position: relative;
+        }
+
+        th:first-child {
+            border-radius: 12px 0 0 0;
+        }
+
+        th:last-child {
+            border-radius: 0 12px 0 0;
+        }
+
+        tbody tr {
+            background: #f8fafc;
+            transition: all 0.3s ease;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #f1f5f9;
+        }
+
+        tbody tr:hover {
+            background: #e3f2fd;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(74, 100, 145, 0.1);
+        }
+
+        td {
+            padding: 16px 20px;
+            border: none;
+            border-bottom: 1px solid rgba(74, 100, 145, 0.1);
+            font-size: 1.05rem;
+        }
+
+        td:first-child {
+            color: #2c3e50;
+            font-weight: 600;
+            font-style: italic;
+            border-right: 1px solid rgba(74, 100, 145, 0.1);
+        }
+
+        td:last-child {
+            color: #4a6491;
+        }
+
+        /* Форма добавления слов */
+        .add-words-form {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            border: 2px solid rgba(74, 100, 145, 0.1);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-title {
+            color: #2c3e50;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-title::before {
+            content: '➕';
+        }
+
+        .input-group {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            min-width: 250px;
+            padding: 14px 20px;
+            border: 2px solid rgba(74, 100, 145, 0.2);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #4a6491;
+            box-shadow: 0 0 0 3px rgba(74, 100, 145, 0.1);
+        }
+
+        input[type="text"]::placeholder {
+            color: #95a5a6;
+        }
+
+        /* Кнопки */
+        .buttons-container {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.2), 
+                transparent);
+            transition: 0.5s;
+        }
+
+        button:hover::before {
+            left: 100%;
+        }
+
+        /* Кнопка Добавить */
+        #addButton {
+            background: linear-gradient(135deg, #27ae60 0%, #219653 100%);
+            color: white;
+        }
+
+        #addButton:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(39, 174, 96, 0.3);
+        }
+
+        #addButton::after {
+            content: '✨';
+        }
+
+        /* Кнопка Очистить */
+        #clearButton {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+        }
+
+        #clearButton:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.3);
+        }
+
+        /* Кнопка возврата */
+        .home-link-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: linear-gradient(135deg, #4a6491 0%, #2c3e50 100%);
+            color: white;
+            text-decoration: none;
+            padding: 14px 30px;
+            border-radius: 25px;
+            font-size: 1rem;
+            margin-top: 30px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+        }
+
+        .home-link-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(44, 62, 80, 0.3);
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px dashed rgba(74, 100, 145, 0.2);
+        }
+
+        /* Декоративные элементы */
+        .french-decor {
+            text-align: center;
+            margin: 20px 0;
+            color: #4a6491;
+            opacity: 0.3;
+            font-size: 2rem;
+            letter-spacing: 15px;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .words-container {
+                padding: 20px;
+            }
+            
+            .table-title {
+                font-size: 1.6rem;
+            }
+            
+            th, td {
+                padding: 12px 15px;
+                font-size: 0.95rem;
+            }
+            
+            .input-group {
+                flex-direction: column;
+            }
+            
+            input[type="text"] {
+                min-width: 100%;
+            }
+            
+            .buttons-container {
+                flex-direction: column;
+            }
+            
+            button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* Анимация для новых строк */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        tbody tr {
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* Информационное сообщение */
+        .info-message {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-left: 5px solid #4a6491;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            font-size: 0.95rem;
+        }
+    </style>
 </head>
 <body>
-<table id="myTable">
-  <thead>
-    <tr>
-      <th>Слово</th>
-      <th>Перевод</th>
-    </tr>
-  </thead>
-  <tbody></tbody>
-</table>
-<div>
-  <input type="text" id="newRecord1Input" placeholder="Введите слово">
-  <input type="text" id="newRecord2Input" placeholder="Введите перевод">
-  <button onclick="addRecord()">Добавить</button>
-</div>
-<button onclick="clearLastRow()">Очистить последнюю строку</button>
-<script>
-  const STORAGE_KEY = 'myRecords';
-  window.addEventListener('load', renderTable);
-  function addRecordToTable(record1, record2) {
-    const tableBody = document.querySelector('#myTable tbody');
-    const row = tableBody.insertRow();
-    const cell1 = row.insertCell();
-    const cell2 = row.insertCell();
-    cell1.textContent = record1;
-    cell2.textContent = record2;
-  }
-  function addRecord() {
-    const input1 = document.getElementById('newRecord1Input');
-    const input2 = document.getElementById('newRecord2Input');
-    const record1Text = input1.value.trim();
-    const record2Text = input2.value.trim();
-if (record1Text === "" || record2Text === "") {
-      alert("Пожалуйста, заполните оба поля.");
-      return;
-    }
-    const records = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-    const newRecord = {
-      record1: record1Text,
-      record2: record2Text
-    };
-    records.push(newRecord);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
-    addRecordToTable(record1Text, record2Text);
-    input1.value = '';
-    input2.value = '';
-    input1.focus();
-  }
-  function renderTable() {
-    const tableBody = document.querySelector('#myTable tbody');
-    tableBody.innerHTML = '';
-    const records = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-    records.forEach(record => {
-      addRecordToTable(record.record1, record.record2);
-    });
-  }
-  function clearLastRow() {
-    const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-    data.pop();
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-    renderTable();
-}
-</script>
+    <header class="header">
+        <h1>Мой словарь 📖</h1>
+    </header>
+
+    <div class="words-container">
+        
+        <div class="info-message">
+            💡 Все слова автоматически сохраняются в вашем браузере. 
+            Вы можете добавлять новые слова и удалять последние.
+        </div>
+
+        <table id="myTable">
+            <thead>
+                <tr>
+                    <th>Слово / Фраза</th>
+                    <th>Перевод</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <div class="french-decor">🇫🇷 📚 🇫🇷</div>
+
+        <div class="add-words-form">
+            <h3 class="form-title">Добавить новое слово</h3>
+            <div class="input-group">
+                <input type="text" id="newRecord1Input" placeholder="Введите французское слово или фразу">
+                <input type="text" id="newRecord2Input" placeholder="Введите перевод на русский">
+            </div>
+            <div class="buttons-container">
+                <button id="addButton" onclick="addRecord()">Добавить в словарь</button>
+                <button id="clearButton" onclick="clearLastRow()">Удалить последнее слово</button>
+            </div>
+        </div>
+
+        <div class="buttons-container">
+            <a href="Проект 9 класс.html" class="home-link-button">
+    <span>← Вернуться на главную</span></a>
+        </div>
+    </div>
+
+    <script>
+        const STORAGE_KEY = 'myRecords';
+        window.addEventListener('load', renderTable);
+
+        function addRecordToTable(record1, record2) {
+            const tableBody = document.querySelector('#myTable tbody');
+            const row = tableBody.insertRow();
+            const cell1 = row.insertCell();
+            const cell2 = row.insertCell();
+            cell1.textContent = record1;
+            cell2.textContent = record2;
+            
+            // Добавляем анимацию для новой строки
+            row.style.animation = 'fadeIn 0.3s ease';
+        }
+
+        function addRecord() {
+            const input1 = document.getElementById('newRecord1Input');
+            const input2 = document.getElementById('newRecord2Input');
+            const record1Text = input1.value.trim();
+            const record2Text = input2.value.trim();
+
+            if (record1Text === "" || record2Text === "") {
+                alert("Пожалуйста, заполните оба поля.");
+                return;
+            }
+
+            const records = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+            const newRecord = {
+                record1: record1Text,
+                record2: record2Text,
+                date: new Date().toLocaleDateString()
+            };
+            
+            records.push(newRecord);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+            addRecordToTable(record1Text, record2Text);
+            
+            // Анимация кнопки
+            const addBtn = document.getElementById('addButton');
+            addBtn.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                addBtn.style.transform = '';
+            }, 300);
+            
+            // Очистка полей и фокус
+            input1.value = '';
+            input2.value = '';
+            input1.focus();
+        }
+
+        function renderTable() {
+            const tableBody = document.querySelector('#myTable tbody');
+            tableBody.innerHTML = '';
+            const records = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+            
+            if (records.length === 0) {
+                const row = tableBody.insertRow();
+                const cell = row.insertCell();
+                cell.colSpan = 2;
+                cell.textContent = 'Ваш словарь пуст. Добавьте первое слово!';
+                cell.style.textAlign = 'center';
+                cell.style.color = '#95a5a6';
+                cell.style.fontStyle = 'italic';
+                cell.style.padding = '40px';
+            } else {
+                records.forEach(record => {
+                    addRecordToTable(record.record1, record.record2);
+                });
+            }
+        }
+
+        function clearLastRow() {
+            const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            if (data.length === 0) {
+                alert('Словарь уже пуст!');
+                return;
+            }
+            
+            // Анимация кнопки
+            const clearBtn = document.getElementById('clearButton');
+            clearBtn.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                clearBtn.style.transform = '';
+            }, 300);
+            
+            const removedWord = data.pop();
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+            renderTable();
+            
+           
+        }
+
+        // Добавляем возможность добавлять слова по Enter
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = document.querySelectorAll('input[type="text"]');
+            inputs.forEach(input => {
+                input.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        addRecord();
+                    }
+                });
+            });
+            
+            // Фокус на первое поле при загрузке
+            document.getElementById('newRecord1Input').focus();
+        });
+    </script>
 </body>
 </html>
-
-
 
 
 
